@@ -20,6 +20,9 @@ class LinkedList:
             temp_node = temp_node.next
         return result
     
+    def all(self):
+        return self.head
+    
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
@@ -89,42 +92,39 @@ class LinkedList:
                     previous_address = next_address
                 next_address = next_address.next
             head = head.next
-           
-    # def remove_duplicates(self):
-    #     if self.head is None:
-    #         return
-    #     node_values = set()  # set to store unique node values
-    #     current_node = self.head
-    #     node_values.add(current_node.value)
-    #     while current_node.next:
-    #         if current_node.next.value in node_values:  # duplicate found
-    #             current_node.next = current_node.next.next
-    #             self.length -= 1
-    #         else:
-    #             node_values.add(current_node.next.value)
-    #             current_node = current_node.next
-    #     self.tail = current_node
-            
+    
+    def printList(self,head):
+        while head:
+            if head.next == None:
+                print(head.value)
+            else:
+                print(f"{head.value} ->  ",end="")
+            head = head.next
 
-ll = LinkedList()
-ll.append(1)
-ll.append(2)
-ll.append(3)
-ll.append(4)
-ll.append(5)
-ll.append(1)
-ll.append(3)
+    
 
+list1 = LinkedList()
+list1.append(1)
+list1.append(2)
+# list1.append(3)
+# list1.append(4)
+# list1.append(5)
 
+class Solution(object):
+    def reverseList(self, head):
+     # Solution goes here
+        current_node = head
+        previous_node = None
 
-
-# print(ll.remove(4).value)
-# print(ll.reverse())
-print(ll)
-print(ll.remove_duplicates())
-print(ll)
+        while current_node:
+            next = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next
+        while head:
+            print(head.value)
+            head = head.next
 
 
-            
-            
-            
+solution = Solution()
+solution.reverseList(list1.all())

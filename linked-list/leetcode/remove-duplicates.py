@@ -20,6 +20,9 @@ class LinkedList:
             temp_node = temp_node.next
         return result
     
+    def all(self):
+        return self.head
+    
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
@@ -89,42 +92,33 @@ class LinkedList:
                     previous_address = next_address
                 next_address = next_address.next
             head = head.next
-           
-    # def remove_duplicates(self):
-    #     if self.head is None:
-    #         return
-    #     node_values = set()  # set to store unique node values
-    #     current_node = self.head
-    #     node_values.add(current_node.value)
-    #     while current_node.next:
-    #         if current_node.next.value in node_values:  # duplicate found
-    #             current_node.next = current_node.next.next
-    #             self.length -= 1
-    #         else:
-    #             node_values.add(current_node.next.value)
-    #             current_node = current_node.next
-    #     self.tail = current_node
-            
+    
+    def printList(self,head):
+        while head:
+            print(f"{head.value} ->  ",end="")
+            head = head.next
 
-ll = LinkedList()
-ll.append(1)
-ll.append(2)
-ll.append(3)
-ll.append(4)
-ll.append(5)
-ll.append(1)
-ll.append(3)
+    
+
+list1 = LinkedList()
+list1.append(1)
+list1.append(1)
+list1.append(2)
+list1.append(2)
+list1.append(4)
 
 
+class Solution(object):
+    def deleteDuplicates(self, head):
+        current_node = head
+        while current_node and current_node.next:
+            if current_node.value == current_node.next.value:
+                current_node.next = current_node.next.next
+            else:
+                current_node = current_node.next
+        return head
 
+        
 
-# print(ll.remove(4).value)
-# print(ll.reverse())
-print(ll)
-print(ll.remove_duplicates())
-print(ll)
-
-
-            
-            
-            
+solution = Solution()
+list1.printList(solution.deleteDuplicates(list1.all()))

@@ -20,6 +20,9 @@ class LinkedList:
             temp_node = temp_node.next
         return result
     
+    def all(self):
+        return self.head
+    
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
@@ -89,42 +92,64 @@ class LinkedList:
                     previous_address = next_address
                 next_address = next_address.next
             head = head.next
-           
-    # def remove_duplicates(self):
-    #     if self.head is None:
-    #         return
-    #     node_values = set()  # set to store unique node values
-    #     current_node = self.head
-    #     node_values.add(current_node.value)
-    #     while current_node.next:
-    #         if current_node.next.value in node_values:  # duplicate found
-    #             current_node.next = current_node.next.next
-    #             self.length -= 1
-    #         else:
-    #             node_values.add(current_node.next.value)
-    #             current_node = current_node.next
-    #     self.tail = current_node
-            
+    
+    def printList(self,head):
+        while head:
+            if head.next == None:
+                print(head.value)
+            else:
+                print(f"{head.value} ->  ",end="")
+            head = head.next
 
-ll = LinkedList()
-ll.append(1)
-ll.append(2)
-ll.append(3)
-ll.append(4)
-ll.append(5)
-ll.append(1)
-ll.append(3)
+    
+
+list1 = LinkedList()
+list1.append(1)
+list1.append(7)
+
+list1.append(7)
+list1.append(7)
+list1.append(7)
+# list1.append(5)
+# list1.append(6)
+# list1.printList(list1.all())
 
 
 
+class Solution(object):
+    def removeElements(self, head, val):
 
-# print(ll.remove(4).value)
-# print(ll.reverse())
-print(ll)
-print(ll.remove_duplicates())
-print(ll)
+        # check in first node
+        while head and head.value == val:
+            head = head.next
+        
+        if not head:
+            return 
+        
+        # check in remining nodes
+        current = head
+        while current.next:
+            if current.next.value == val:
+                current.next = current.next.next
+            else:
+                current = current.next
+        
+        return head
+        
+# class Solution(object):
+#     def removeElements(self, head, val):
+#         dummy_head = ListNode(-1)
+#         dummy_head.next = head
+ 
+#         prev_node, curr_node = dummy_head, head
+#         while curr_node:
+#             if curr_node.val == val:
+#                 prev_node.next = curr_node.next
+#             else:
+#                 prev_node = curr_node
+#             curr_node = curr_node.next
+ 
+#         return dummy_head.next
 
-
-            
-            
-            
+solution = Solution()
+solution.removeElements(list1.all(),1)
